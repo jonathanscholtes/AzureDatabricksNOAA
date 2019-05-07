@@ -112,7 +112,7 @@ def retrieve_weather(api_key,start,stop,fips,datasetid='GHCND',datatype='TAVG' )
   print(datasetid)
   print(datatype)
 
-  tempdata = pd.DataFrame() 
+  tempdata = pd.DataFrame({'A' : [1]})
 
   # NOAA API limits records to 1000, loop until all records for call are returned
   while remaining > 0:
