@@ -75,7 +75,7 @@ def retrieve_data_types_by_categoryid(api_key, datacategoryid= 'TEMP'):
 
     params = urllib.parse.urlencode({
       'datacategoryid':datacategoryid,
-      'limit':100
+      'limit':1000
     })
 
     try:
@@ -111,6 +111,8 @@ def retrieve_weather(api_key,start,stop,fips,datasetid='GHCND',datatype='TAVG' )
   print(fips)
   print(datasetid)
   print(datatype)
+
+  tempdata = pd.DataFrame() 
 
   # NOAA API limits records to 1000, loop until all records for call are returned
   while remaining > 0:
@@ -171,8 +173,8 @@ def retrieve_weather(api_key,start,stop,fips,datasetid='GHCND',datatype='TAVG' )
         sleep(2)
     else:
         print('no metadata')
-        if retry > 2:
-            return pd.DataFrame()
+        if retry > 6:
+            return tempdata
         else:
             retry += 1
             sleep(4)
